@@ -1,11 +1,13 @@
 package br.ifpe.web2.services;
 
+
 import br.ifpe.web2.dao.ContatoDao;
 import br.ifpe.web2.model.Contato;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ContatoService {
@@ -14,7 +16,7 @@ public class ContatoService {
     ContatoDao contatoDao;
 
 
-    public ArrayList<Contato> listarContatos(){
+    public List<Contato> listarContatos(){
         return contatoDao.findAll();
     }
 

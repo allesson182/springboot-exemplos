@@ -4,10 +4,12 @@ import br.ifpe.web2.model.Contato;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface ContatoDao extends JpaRepository<Contato,Long> {
 
-    ArrayList<Contato> findAll();
+    List<Contato> findAll();
 
     Contato findByEmail(String email);
+    Contato findContatoByNome(String nome);
 }

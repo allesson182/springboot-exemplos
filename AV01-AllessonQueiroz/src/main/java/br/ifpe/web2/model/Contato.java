@@ -1,8 +1,10 @@
 package br.ifpe.web2.model;
 
+
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,8 +18,10 @@ public class Contato {
 	private String nome;
 	private String email;
 	private String telefone;
-	@ElementCollection
-	private ArrayList<String>apps;
+	@ElementCollection // 1
+	@CollectionTable(name = "my_list", joinColumns = @JoinColumn(name = "id")) // 2
+	@Column(name = "list")
+	private List<String> apps;
 	private String grupo;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataNascimento;
@@ -47,10 +51,10 @@ public class Contato {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public ArrayList<String> getApps() {
+	public List<String> getApps() {
 		return apps;
 	}
-	public void setApps(ArrayList<String> apps) {
+	public void setApps(List<String> apps) {
 		this.apps = apps;
 	}
 	public String getGrupo() {
@@ -71,6 +75,7 @@ public class Contato {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

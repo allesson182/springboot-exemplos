@@ -3,14 +3,13 @@ package br.ifpe.web2.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ifpe.web2.model.Contato;
 import br.ifpe.web2.services.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import br.ifpe.web2.model.Contato;
 
 @Controller
 public class ContatoController {
@@ -27,12 +26,13 @@ public class ContatoController {
 	public String salvarContato(Contato contato) {
 		contatoService.adicionarContato(contato);
 		System.out.println(contato);
+		System.out.println("dados novos");
 		return "redirect:/listarContatos";
 	}
 	
 	@GetMapping("/listarContatos")
 	public String listarContatos(Model model) {
-		ArrayList<Contato> listaContatos = contatoService.listarContatos();
+		List<Contato> listaContatos = contatoService.listarContatos();
 		model.addAttribute("lista", listaContatos);
 		return "contatos-list";
 	}
