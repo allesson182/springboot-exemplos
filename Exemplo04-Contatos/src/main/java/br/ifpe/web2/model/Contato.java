@@ -1,20 +1,34 @@
 package br.ifpe.web2.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Contato {
+import javax.persistence.*;
 
+@Entity
+public class Contato {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String nome;
-	private String telefone;
 	private String email;
-	private String[] apps;
+	private String telefone;
+	@ElementCollection
+	private ArrayList<String>apps;
 	private String grupo;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataNascimento;
 	private String estado;
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getId() {
+		return id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -33,10 +47,10 @@ public class Contato {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String[] getApps() {
+	public ArrayList<String> getApps() {
 		return apps;
 	}
-	public void setApps(String[] apps) {
+	public void setApps(ArrayList<String> apps) {
 		this.apps = apps;
 	}
 	public String getGrupo() {
@@ -80,13 +94,18 @@ public class Contato {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
-		return "Contato [nome=" + nome + ", telefone=" + telefone + ", email=" + email + ", apps="
-				+ Arrays.toString(apps) + ", grupo=" + grupo + ", dataNascimento=" + dataNascimento + ", estado="
-				+ estado + "]";
+		return "Contato{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", email='" + email + '\'' +
+				", telefone='" + telefone + '\'' +
+				", apps=" + apps +
+				", grupo='" + grupo + '\'' +
+				", dataNascimento=" + dataNascimento +
+				", estado='" + estado + '\'' +
+				'}';
 	}
-	
-	
-	
 }

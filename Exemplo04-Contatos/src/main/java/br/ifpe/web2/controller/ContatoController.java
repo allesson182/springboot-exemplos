@@ -3,6 +3,8 @@ package br.ifpe.web2.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ifpe.web2.services.ContatoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +14,9 @@ import br.ifpe.web2.model.Contato;
 
 @Controller
 public class ContatoController {
-	
-	private List<Contato> contatos = new ArrayList<>();
+
+	@Autowired
+	ContatoService contatoService;
 
 	@GetMapping("/exibirContato")
 	public String exibirForm(Contato contato) {
@@ -22,40 +25,27 @@ public class ContatoController {
 	
 	@PostMapping("/salvarContato")
 	public String salvarContato(Contato contato) {
-		this.contatos.remove(contato);
-		this.contatos.add(contato);
+		contatoService.adicionarContato(contato);
 		System.out.println(contato);
 		return "redirect:/listarContatos";
 	}
 	
 	@GetMapping("/listarContatos")
 	public String listarContatos(Model model) {
-		model.addAttribute("lista", contatos);
+		ArrayList<Contato> listaContatos = contatoService.listarContatos();
+		model.addAttribute("lista", listaContatos);
 		return "contatos-list";
 	}
 	
 	@GetMapping("/removerContato")
 	public String removerContato(String email) {
-		Contato contatoParaRemover = null;
-		for(Contato cont : this.contatos) {
-			if(cont.getEmail().equals(email)) {
-				contatoParaRemover = cont;
-			}
-		}
-		if (contatoParaRemover != null) {
-			this.contatos.remove(contatoParaRemover);
-		}
+		contatoService.deletarContato(email);
 		return "redirect:/listarContatos";
 	}
 	
 	@GetMapping("/editarContato")
 	public String editarContato(String email, Model model) {
-		Contato contatoParaEditar = null;
-		for(Contato cont : this.contatos) {
-			if(cont.getEmail().equals(email)) {
-				contatoParaEditar = cont;
-			}
-		}
+		Contato contatoParaEditar = contatoService.getContatoByEmail(email);
 		model.addAttribute("contato", contatoParaEditar);
 		return "contatos-form";
 	}
