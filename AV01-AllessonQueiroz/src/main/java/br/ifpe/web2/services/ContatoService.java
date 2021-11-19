@@ -26,15 +26,20 @@ public class ContatoService {
     }
 
     public void editarContato(Contato contatoAtualizado){
-       Contato contatoAtual = contatoDao.findByEmail(contatoAtualizado.getEmail());
-       contatoAtual.setEmail(contatoAtualizado.getEmail());
-       contatoAtual.setEstado(contatoAtualizado.getEstado());
-       contatoAtual.setGrupo(contatoAtualizado.getGrupo());
-       contatoAtual.setNome(contatoAtualizado.getNome());
-       contatoAtual.setEmail(contatoAtualizado.getEmail());
-       contatoAtual.setApps(contatoAtualizado.getApps());
-       contatoAtual.setTelefone(contatoAtual.getTelefone());
-       contatoDao.save(contatoAtual);
+       try {
+           Contato contatoAtual = contatoDao.findById(contatoAtualizado.getId()).get();
+           contatoAtual.setEmail(contatoAtualizado.getEmail());
+           contatoAtual.setEstado(contatoAtualizado.getEstado());
+           contatoAtual.setGrupo(contatoAtualizado.getGrupo());
+           contatoAtual.setNome(contatoAtualizado.getNome());
+           contatoAtual.setEmail(contatoAtualizado.getEmail());
+           contatoAtual.setApps(contatoAtualizado.getApps());
+           contatoAtual.setTelefone(contatoAtualizado.getTelefone());
+           contatoDao.save(contatoAtual);
+       }catch (Exception e){
+           e.printStackTrace();
+
+       }
     }
 
     public void deletarContato(String email){
@@ -44,5 +49,9 @@ public class ContatoService {
 
     public void adicionarContato(Contato contato){
         contatoDao.save(contato);
+    }
+
+    public Contato getContatoById(Long id){
+        return contatoDao.findById(id).get();
     }
 }

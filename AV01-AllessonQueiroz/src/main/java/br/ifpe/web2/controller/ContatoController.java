@@ -24,9 +24,11 @@ public class ContatoController {
 	
 	@PostMapping("/salvarContato")
 	public String salvarContato(Contato contato) {
-		contatoService.adicionarContato(contato);
-		System.out.println(contato);
-		System.out.println("dados novos");
+		if (contato.getId() == null ){
+			contatoService.adicionarContato(contato);
+		}else if (contato.getId() != null){
+			contatoService.editarContato(contato);
+		}
 		return "redirect:/listarContatos";
 	}
 	

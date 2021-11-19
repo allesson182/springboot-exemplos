@@ -1,13 +1,10 @@
 package br.ifpe.web2.model;
 
 
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,9 +15,8 @@ public class Contato {
 	private String nome;
 	private String email;
 	private String telefone;
-	@ElementCollection // 1
-	@CollectionTable(name = "my_list", joinColumns = @JoinColumn(name = "id")) // 2
-	@Column(name = "list")
+	@ElementCollection
+	@CollectionTable
 	private List<String> apps;
 	private String grupo;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
