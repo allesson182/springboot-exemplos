@@ -4,6 +4,7 @@ package br.ifpe.web2.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 
@@ -18,7 +19,9 @@ public class Contato {
 	@ElementCollection
 	@CollectionTable
 	private List<String> apps;
-	private String grupo;
+	@ManyToOne
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	private Grupo grupo;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataNascimento;
 	private String estado;
@@ -53,10 +56,10 @@ public class Contato {
 	public void setApps(List<String> apps) {
 		this.apps = apps;
 	}
-	public String getGrupo() {
+	public Grupo getGrupo() {
 		return grupo;
 	}
-	public void setGrupo(String grupo) {
+	public void setGrupo(Grupo grupo) {
 		this.grupo = grupo;
 	}
 	public Date getDataNascimento() {

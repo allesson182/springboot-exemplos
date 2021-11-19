@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ifpe.web2.model.Contato;
+import br.ifpe.web2.model.Grupo;
+import br.ifpe.web2.model.Visibilidade;
 import br.ifpe.web2.services.ContatoService;
+import br.ifpe.web2.services.GrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +19,37 @@ public class ContatoController {
 
 	@Autowired
 	ContatoService contatoService;
+	@Autowired
+	GrupoService grupoService;
 
 	@GetMapping("/exibirContato")
-	public String exibirForm(Contato contato) {
+	public String exibirForm(Contato contato, Model model) {
+		Grupo grupo1 = new Grupo();
+		Grupo grupo2 = new Grupo();
+		Grupo grupo3 = new Grupo();
+		grupo1.setNome("Familia");
+		grupo1.setVisibilidade(Visibilidade.PUBLICO);
+		grupo2.setNome("Amigos");
+		grupo2.setVisibilidade(Visibilidade.PUBLICO);
+		grupo3.setNome("Trabalho");
+		grupo3.setVisibilidade(Visibilidade.PUBLICO);
+		grupoService.adicionargrupo(grupo1);
+		grupoService.adicionargrupo(grupo2);
+		grupoService.adicionargrupo(grupo3);
+		List<Grupo> listaGrupo = grupoService.getAllGrupos();
+		model.addAttribute("listaGrupos", listaGrupo);
 		return "contatos-form";
 	}
 	
 	@PostMapping("/salvarContato")
 	public String salvarContato(Contato contato) {
 		if (contato.getId() == null ){
+			Grupo grupo = grupoService.getGrupoById(contato.getGrupo().getId());
+			contato.setGrupo(grupo);
 			contatoService.adicionarContato(contato);
+
+
+
 		}else if (contato.getId() != null){
 			contatoService.editarContato(contato);
 		}
