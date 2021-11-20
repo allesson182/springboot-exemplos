@@ -32,12 +32,13 @@ public class ContatoController {
 	@PostMapping("/salvarContato")
 	public String salvarContato(Contato contato) {
 		if (contato.getId() == null ){
+			if(contato.getGrupo() == null || contato.getGrupo().equals("")){
+				contatoService.adicionarContato(contato);
+				return "redirect:/listarContatos";
+			}
 			Grupo grupo = grupoService.getGrupoById(contato.getGrupo().getId());
 			contato.setGrupo(grupo);
 			contatoService.adicionarContato(contato);
-
-
-
 		}else if (contato.getId() != null){
 			contatoService.editarContato(contato);
 		}

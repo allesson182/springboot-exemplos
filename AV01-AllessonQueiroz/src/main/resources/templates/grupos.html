@@ -17,7 +17,7 @@
     <li><a href="/exibirContato">Cadastrar Contatos</a></li>
     <li><a href="/listarContatos">Listar Contatos</a></li>
     <li><a href="/addgrupo">Cadastrar Grupo</a></li>
-    <li><a>Gerenciar Grupos</a></li>
+    <li><a href="/grupos">Gerenciar Grupos</a></li>
   </ul>
 </nav>
 <div class="contatiner col-sm-8 col-md-12 col-md-offset-2">
@@ -36,8 +36,8 @@
       <td th:text="${grupo.dataExpiracao}" th:if="${grupo != ''}"></td>
       <td th:if="${grupo == null}">Sem data de expiração</td>
 
-      <td><a th:href="@{/editarContato(email=${grupo.id})}">Editar</a>&nbsp;&nbsp;
-        <a th:href="@{/removerContato(email=${grupo.id})}">Remover</a></td>
+      <td><a th:href="@{/grupoedit(id=${grupo.id})}">Editar</a>&nbsp;&nbsp;
+          <a th:href="@{/delgrupo(id=${grupo.id})}">Remover</a></td>
     </tr>
   </table>
   <hr />

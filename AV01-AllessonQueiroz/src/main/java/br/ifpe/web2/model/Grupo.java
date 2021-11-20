@@ -13,7 +13,7 @@ public class Grupo {
     private String nome;
     @Enumerated
     private Visibilidade visibilidade;
-    @DateTimeFormat
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dataExpiracao;
 
     public Long getId() {

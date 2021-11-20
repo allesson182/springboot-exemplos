@@ -13,12 +13,12 @@
 <body>
 
 <nav class="navbar navbar-inverse">
-  <ul class="nav navbar-nav">
-    	<li><a >Cadastrar Contatos</a></li>
-    	<li><a href="/listarContatos">Listar Contatos</a></li>
-	  	<li><a href="/addgrupo">Cadastrar Grupo</a></li>
-	  	<li><a href="/grupos">Gerenciar Grupos</a></li>
-  </ul>
+	<ul class="nav navbar-nav">
+		<li><a href="/exibirContato">Cadastrar Contatos</a></li>
+		<li><a href="/listarContatos">Listar Contatos</a></li>
+		<li><a href="/addgrupo">Cadastrar Grupo</a></li>
+		<li><a href="/grupos">Gerenciar Grupos</a></li>
+	</ul>
 </nav>
 
 	<div class="container col-sm-12 col-md-6 col-md-offset-2" >
@@ -51,8 +51,8 @@
 					th:field="*{apps}" th:value="Slack" />
 					<label class="form-check-label">Slack</label>
 			</div>
-			<label for="apps">Grupo</label><Br/>
-			<div th:if="${#lists.isEmpty(listaGrupos)}">Nenhum Grupo adicionado, <a href="/">adicionar?</a></div>
+			<label >Grupo</label><Br/>
+			<div th:if="${#lists.isEmpty(listaGrupos)}">Nenhum Grupo adicionado, <a href="/addgrupo">adicionar?</a></div>
 
 			<div th:each="grupoBD : ${listaGrupos}" class="form-group form-check">
 				<div class="form-group">
@@ -62,8 +62,8 @@
 			</div>
 
 			<div class="form-group">
-				<label for="data">Data de Nascimento</label> <input type="date" class="form-control"
-					th:field="*{dataNascimento}" />
+				<label for="dataNascimento">Data de Nascimento</label> <input type="date" class="form-control"
+					th:field="*{dataNascimento}" id="dataNascimento" />
 			</div>
 			<div class="form-group">
 				<label for="estado">Estado</label> 

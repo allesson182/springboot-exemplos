@@ -18,7 +18,7 @@ public class GrupoService {
 
     }
 
-    public void adicionargrupo(Grupo grupo) {
+    public void adicionarGrupo(Grupo grupo) {
         grupoDao.save(grupo);
     }
 
@@ -30,7 +30,7 @@ public class GrupoService {
         grupoDao.deleteById(id);
     }
 
-    public void editarContato(Grupo grupoAtualizado){
+    public void editarGrupo(Grupo grupoAtualizado){
         try {
             Grupo grupoAtual = grupoDao.findById(grupoAtualizado.getId()).get();
             grupoAtual.setNome(grupoAtualizado.getNome());

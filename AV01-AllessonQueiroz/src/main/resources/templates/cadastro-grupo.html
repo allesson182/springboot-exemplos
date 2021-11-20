@@ -16,13 +16,13 @@
   <ul class="nav navbar-nav">
     <li><a href="/exibirContato">Cadastrar Contatos</a></li>
     <li><a href="/listarContatos">Listar Contatos</a></li>
-    <li><a>Adicionar Grupo</a></li>
+    <li><a href="/addgrupo">Cadastrar Grupo</a></li>
     <li><a href="/grupos">Gerenciar Grupos</a></li>
   </ul>
 </nav>
 
 <div class="container col-sm-12 col-md-6 col-md-offset-2" >
-  <form action="/savegrupo" th:object="${grupo}" method="post">
+  <form action="/addgrupo" th:object="${grupo}" method="post">
     <div class="form-group">
       <input type="hidden" th:field="*{id}">
     </div>
@@ -55,9 +55,8 @@
       <input type="date" th:field="*{dataExpiracao}" class="form-control" id="dataExpiracao">
     </div>
 
-
     <button type="submit" class="btn btn-primary">Enviar</button>
-    <button type="button" href="/" class="btn btn-dangger">Cancelar</button>
+    <a  href="/" class="btn btn-warning">Cancelar</a>
   </form>
 
 </div>
