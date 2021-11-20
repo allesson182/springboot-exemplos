@@ -16,6 +16,7 @@
   <ul class="nav navbar-nav">
     <li><a href="/exibirContato">Cadastrar Contatos</a></li>
     <li><a href="/listarContatos">Listar Contatos</a></li>
+	  <li><a href="/grupos">Gerenciar Grupos</a></li>
   </ul>
 </nav>
 
@@ -50,12 +51,15 @@
 					<label class="form-check-label">Slack</label>
 			</div>
 			<label for="apps">Grupo</label><Br/>
+			<div th:if="${#lists.isEmpty(listaGrupos)}">Nenhum Grupo adicionado, <a href="/">adicionar?</a></div>
+
 			<div th:each="grupoBD : ${listaGrupos}" class="form-group form-check">
 				<div class="form-group">
 					<label class="form-check-label" th:text="${grupoBD.nome}"> </label>
 					<input type="radio" class="form-check-input" th:field="*{grupo.id}" th:value="${grupoBD.id}" />
 				</div>
 			</div>
+
 			<div class="form-group">
 				<label for="data">Data de Nascimento</label> <input type="date" class="form-control"
 					th:field="*{dataNascimento}" />

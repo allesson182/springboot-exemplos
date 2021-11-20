@@ -24,18 +24,6 @@ public class ContatoController {
 
 	@GetMapping("/exibirContato")
 	public String exibirForm(Contato contato, Model model) {
-		Grupo grupo1 = new Grupo();
-		Grupo grupo2 = new Grupo();
-		Grupo grupo3 = new Grupo();
-		grupo1.setNome("Familia");
-		grupo1.setVisibilidade(Visibilidade.PUBLICO);
-		grupo2.setNome("Amigos");
-		grupo2.setVisibilidade(Visibilidade.PUBLICO);
-		grupo3.setNome("Trabalho");
-		grupo3.setVisibilidade(Visibilidade.PUBLICO);
-		grupoService.adicionargrupo(grupo1);
-		grupoService.adicionargrupo(grupo2);
-		grupoService.adicionargrupo(grupo3);
 		List<Grupo> listaGrupo = grupoService.getAllGrupos();
 		model.addAttribute("listaGrupos", listaGrupo);
 		return "contatos-form";
@@ -74,5 +62,11 @@ public class ContatoController {
 		Contato contatoParaEditar = contatoService.getContatoByEmail(email);
 		model.addAttribute("contato", contatoParaEditar);
 		return "contatos-form";
+	}
+
+	@GetMapping("/")
+	public String home(){
+
+		return "index";
 	}
 }
