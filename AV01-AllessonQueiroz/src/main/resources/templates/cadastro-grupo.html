@@ -28,21 +28,21 @@
     </div>
     <div class="form-group">
       <label for="nome">Nome do grupo</label>
-      <input type="text"          th:field="*{nome}"
+      <input required="required" type="text"          th:field="*{nome}"
              class="form-control" id="nome" placeholder="Nome do grupo">
     </div>
     <label >Visibilidade</label>
     <div class="form-group form-check">
     <div class="form-group">
         <label class="form-check-label" for="visibilidade">Publico</label>
-          <input type="radio"
+          <input required="required" type="radio"
              th:field="*{visibilidade}"
              class="form-check-input"
              id="visibilidade"
              placeholder="VisibilidadePublico"
             value="PUBLICO">
       <label class="form-check-label" for="visibilidadePrivado">Privado</label>
-        <input type="radio"
+        <input required="required" type="radio"
            th:field="*{visibilidade}"
            class="form-check-input"
            id="visibilidadePrivado"
@@ -51,7 +51,8 @@
     </div>
     </div>
     <div class="form-group">
-      <label for="nome">Data de Expiração</label>
+      <label  for="nome">Data de Expiração</label><br>
+      <small class="form-text text-muted"> Caso não queira que expire, Deixe vazio.</small>
       <input type="date" th:field="*{dataExpiracao}" class="form-control" id="dataExpiracao">
     </div>
 

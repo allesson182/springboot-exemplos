@@ -2,6 +2,7 @@ package br.ifpe.web2.services;
 
 import br.ifpe.web2.dao.GrupoDao;
 import br.ifpe.web2.model.Grupo;
+import br.ifpe.web2.model.Visibilidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,9 @@ public class GrupoService {
     public List<Grupo> getAllGrupos() {
        return  grupoDao.findAll();
 
+    }
+    public  List<Grupo> getAllGruposVisibilidadePublica(){
+        return grupoDao.findGrupoByVisibilidadeEquals(Visibilidade.PUBLICO);
     }
 
     public void adicionarGrupo(Grupo grupo) {

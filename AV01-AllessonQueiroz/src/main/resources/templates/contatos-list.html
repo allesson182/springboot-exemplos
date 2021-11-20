@@ -21,6 +21,7 @@
 	</ul>
 </nav>
 	<div class="contatiner col-sm-8 col-md-12 col-md-offset-2">
+		<div th:if="${#lists.isEmpty(lista)}">Ninguem adicionado, <a href="/exibirContato">adicionar?</a></div>
 		<table class="table table-dark">
 			<tr>
 				<th>Nome</th>

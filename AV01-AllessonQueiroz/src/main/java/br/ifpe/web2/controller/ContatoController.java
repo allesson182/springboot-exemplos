@@ -24,7 +24,8 @@ public class ContatoController {
 
 	@GetMapping("/exibirContato")
 	public String exibirForm(Contato contato, Model model) {
-		List<Grupo> listaGrupo = grupoService.getAllGrupos();
+		//só vai ser permitido fazer parte do grupo se o mesmo for publico
+		List<Grupo> listaGrupo = grupoService.getAllGruposVisibilidadePublica();
 		model.addAttribute("listaGrupos", listaGrupo);
 		return "contatos-form";
 	}

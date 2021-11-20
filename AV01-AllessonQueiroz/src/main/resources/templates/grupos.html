@@ -21,6 +21,7 @@
   </ul>
 </nav>
 <div class="contatiner col-sm-8 col-md-12 col-md-offset-2">
+  <div th:if="${#lists.isEmpty(listaGrupo)}">Nenhum Grupo adicionado, <a href="/addgrupo">adicionar?</a></div>
   <table class="table table-dark">
     <tr>
       <th>Nome</th>
@@ -29,13 +30,9 @@
       <th>Acões</th>
     </tr>
     <tr th:each="grupo : ${listaGrupo}">
-      <td th:text="${grupo.nome}" th:if="${grupo != ''}"></td>
-      <td th:if="${grupo == ''}">Grupo sem nome</td>
-      <td th:text="${grupo.visibilidade}" th:if="${grupo != ''}"></td>
-      <td th:if="${grupo == ''}">Visibilidade não informada</td>
-      <td th:text="${grupo.dataExpiracao}" th:if="${grupo != ''}"></td>
-      <td th:if="${grupo == null}">Sem data de expiração</td>
-
+      <td th:text="${grupo.nome}"></td>
+      <td th:text="${grupo.visibilidade}"></td>
+      <td th:text="${grupo.dataExpiracao}"></td>
       <td><a th:href="@{/grupoedit(id=${grupo.id})}">Editar</a>&nbsp;&nbsp;
           <a th:href="@{/delgrupo(id=${grupo.id})}">Remover</a></td>
     </tr>

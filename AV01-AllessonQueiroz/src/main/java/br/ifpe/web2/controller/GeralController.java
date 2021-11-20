@@ -10,7 +10,7 @@ public class GeralController {
     @GetMapping("/")
     public String home(){
 
-        return "index";
+        return "contatos-list";
     }
 
     @GetMapping("/error")
