@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Contatos :: Adicionar</title>
+  <link
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
+          rel="stylesheet" id="bootstrap-css">
+  <script
+          src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <ul class="nav navbar-nav">
+    <li><a href="/exibirContato">Cadastrar Contatos</a></li>
+    <li><a href="/listarContatos">Listar Contatos</a></li>
+    <li><a>Adicionar Grupo</a></li>
+    <li><a href="/grupos">Gerenciar Grupos</a></li>
+  </ul>
+</nav>
+
+<div class="container col-sm-12 col-md-6 col-md-offset-2" >
+  <form action="/savegrupo" th:object="${grupo}" method="post">
+    <div class="form-group">
+      <input type="hidden" th:field="*{id}">
+    </div>
+    <div class="form-group">
+      <label for="nome">Nome do grupo</label>
+      <input type="text"          th:field="*{nome}"
+             class="form-control" id="nome" placeholder="Nome do grupo">
+    </div>
+    <label >Visibilidade</label>
+    <div class="form-group form-check">
+    <div class="form-group">
+        <label class="form-check-label" for="visibilidade">Publico</label>
+          <input type="radio"
+             th:field="*{visibilidade}"
+             class="form-check-input"
+             id="visibilidade"
+             placeholder="VisibilidadePublico"
+            value="PUBLICO">
+      <label class="form-check-label" for="visibilidadePrivado">Privado</label>
+        <input type="radio"
+           th:field="*{visibilidade}"
+           class="form-check-input"
+           id="visibilidadePrivado"
+           placeholder="Visibilidade"
+           value="PRIVADO">
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="nome">Data de Expiração</label>
+      <input type="date" th:field="*{dataExpiracao}" class="form-control" id="dataExpiracao">
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Enviar</button>
+    <button type="button" href="/" class="btn btn-dangger">Cancelar</button>
+  </form>
+
+</div>
+
+</body>
+</html>

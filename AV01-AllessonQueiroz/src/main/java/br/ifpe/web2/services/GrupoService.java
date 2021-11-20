@@ -25,4 +25,26 @@ public class GrupoService {
     public Grupo getGrupoById(Long id) {
         return grupoDao.findById(id).get();
     }
+
+    public void deletarGrupo(Long id) {
+        grupoDao.deleteById(id);
+    }
+
+    public void editarContato(Grupo grupoAtualizado){
+        try {
+            Grupo grupoAtual = grupoDao.findById(grupoAtualizado.getId()).get();
+            grupoAtual.setNome(grupoAtualizado.getNome());
+            grupoAtual.setVisibilidade(grupoAtualizado.getVisibilidade());
+            if (grupoAtualizado.getDataExpiracao().equals("") || grupoAtualizado.getDataExpiracao() == null  ){
+                grupoDao.save(grupoAtual);
+            }else
+                grupoAtual.setDataExpiracao(grupoAtualizado.getDataExpiracao());
+
+
+            grupoDao.save(grupoAtual);
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+    }
 }

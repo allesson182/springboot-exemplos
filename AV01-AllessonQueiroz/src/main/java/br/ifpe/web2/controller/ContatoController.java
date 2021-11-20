@@ -64,9 +64,4 @@ public class ContatoController {
 		return "contatos-form";
 	}
 
-	@GetMapping("/")
-	public String home(){
-
-		return "index";
-	}
 }
