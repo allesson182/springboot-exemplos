@@ -20,7 +20,7 @@ public class Contato {
 	@CollectionTable
 	private List<String> apps;
 	@ManyToOne
-	@Cascade(org.hibernate.annotations.CascadeType.ALL)
+	@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 	private Grupo grupo;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date dataNascimento;
