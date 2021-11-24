@@ -25,25 +25,16 @@ public class GrupoController {
 
     @PostMapping("/addgrupo")
     public String adicionarGrupo(Grupo grupo, Model model) {
-        // caso possua id, o mesmo sera editado, caso não possua sera adicionado ao banco
-        if ( grupo.getId() != null) {
-            grupoService.editarGrupo(grupo);
+            grupoService.adicionarGrupo(grupo);
             return "redirect:/grupos";
-        }else {
-            try {
-                grupoService.adicionarGrupo(grupo);
-                return "redirect:/grupos";
-            } catch (Exception e) {
-                model.addAttribute("Erro", e.getMessage());
-                return "error";
-            }
-        }
+
+
     }
 
     @GetMapping("/grupoedit")
     public String editarGrupo(Long id, Model model){
-        Grupo contatoParaEditar = grupoService.getGrupoById(id);
-        model.addAttribute("grupo", contatoParaEditar);
+        Grupo grupoParaEditar = grupoService.getGrupoById(id);
+        model.addAttribute("grupo", grupoParaEditar);
         return "cadastro-grupo";
 
     }

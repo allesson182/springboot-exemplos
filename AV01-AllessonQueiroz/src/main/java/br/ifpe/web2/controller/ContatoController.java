@@ -24,25 +24,14 @@ public class ContatoController {
 
 	@GetMapping("/exibirContato")
 	public String exibirForm(Contato contato, Model model) {
-		//só vai ser permitido fazer parte do grupo se o mesmo for publico
-		List<Grupo> listaGrupo = grupoService.getAllGruposVisibilidadePublica();
+		List<Grupo> listaGrupo = grupoService.getGruposDataVigente();
 		model.addAttribute("listaGrupos", listaGrupo);
 		return "contatos-form";
 	}
 	
 	@PostMapping("/salvarContato")
 	public String salvarContato(Contato contato) {
-		if (contato.getId() == null ){
-			if(contato.getGrupo() == null || contato.getGrupo().equals("")){
-				contatoService.adicionarContato(contato);
-				return "redirect:/listarContatos";
-			}
-			Grupo grupo = grupoService.getGrupoById(contato.getGrupo().getId());
-			contato.setGrupo(grupo);
-			contatoService.adicionarContato(contato);
-		}else if (contato.getId() != null){
-			contatoService.editarContato(contato);
-		}
+		contatoService.adicionarContato(contato);
 		return "redirect:/listarContatos";
 	}
 	
@@ -54,14 +43,16 @@ public class ContatoController {
 	}
 	
 	@GetMapping("/removerContato")
-	public String removerContato(String email) {
-		contatoService.deletarContato(email);
+	public String removerContato(Long id) {
+		contatoService.deletarContato(id);
 		return "redirect:/listarContatos";
 	}
 	
 	@GetMapping("/editarContato")
-	public String editarContato(String email, Model model) {
-		Contato contatoParaEditar = contatoService.getContatoByEmail(email);
+	public String editarContato(Long id, Model model) {
+		List<Grupo> listaGrupo = grupoService.getGruposDataVigente();
+		model.addAttribute("listaGrupos", listaGrupo);
+		Contato contatoParaEditar = contatoService.getContatoById(id);
 		model.addAttribute("contato", contatoParaEditar);
 		return "contatos-form";
 	}

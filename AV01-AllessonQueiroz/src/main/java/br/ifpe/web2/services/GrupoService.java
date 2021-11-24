@@ -6,6 +6,9 @@ import br.ifpe.web2.model.Visibilidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -34,21 +37,12 @@ public class GrupoService {
         grupoDao.deleteById(id);
     }
 
-    public void editarGrupo(Grupo grupoAtualizado){
-        try {
-            Grupo grupoAtual = grupoDao.findById(grupoAtualizado.getId()).get();
-            grupoAtual.setNome(grupoAtualizado.getNome());
-            grupoAtual.setVisibilidade(grupoAtualizado.getVisibilidade());
-            if (grupoAtualizado.getDataExpiracao().equals("") || grupoAtualizado.getDataExpiracao() == null  ){
-                grupoDao.save(grupoAtual);
-            }else
-                grupoAtual.setDataExpiracao(grupoAtualizado.getDataExpiracao());
+    public void editarGrupo(Grupo grupo){
+        grupoDao.save(grupo);
+    }
 
-
-            grupoDao.save(grupoAtual);
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
+    public List<Grupo> getGruposDataVigente() {
+        Calendar calendar = Calendar.getInstance();
+        return grupoDao.findGrupoByDataExpiracaoAfterOrDataExpiracaoIsNull(calendar.getTime());
     }
 }

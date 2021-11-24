@@ -25,26 +25,13 @@ public class ContatoService {
        return contato;
     }
 
-    public void editarContato(Contato contatoAtualizado){
-       try {
-           Contato contatoAtual = contatoDao.findById(contatoAtualizado.getId()).get();
-           contatoAtual.setEmail(contatoAtualizado.getEmail());
-           contatoAtual.setEstado(contatoAtualizado.getEstado());
-           contatoAtual.setGrupo(contatoAtualizado.getGrupo());
-           contatoAtual.setNome(contatoAtualizado.getNome());
-           contatoAtual.setEmail(contatoAtualizado.getEmail());
-           contatoAtual.setApps(contatoAtualizado.getApps());
-           contatoAtual.setTelefone(contatoAtualizado.getTelefone());
-           contatoDao.save(contatoAtual);
-       }catch (Exception e){
-           e.printStackTrace();
-
-       }
+    public void editarContato(Contato contato){
+           contatoDao.save(contato);
     }
 
-    public void deletarContato(String email){
-        Contato contatoAtual = contatoDao.findByEmail(email);
-        contatoDao.delete(contatoAtual);
+    public void deletarContato(Long id){
+        Contato contato = contatoDao.findById(id).get();
+        contatoDao.delete(contato);
     }
 
     public void adicionarContato(Contato contato){

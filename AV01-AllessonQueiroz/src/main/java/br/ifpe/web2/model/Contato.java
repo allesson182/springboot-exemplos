@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 public class Contato {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String email;
