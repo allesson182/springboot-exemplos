@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  banco:
+    image: mariadb:latest
+    container_name: banco
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+    restart: always
+  crud:
+    build: "./"
+    container_name: crud-container
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - banco
